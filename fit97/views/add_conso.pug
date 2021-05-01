@@ -1,0 +1,115 @@
+extends layout2
+
+block head
+ script(type='text/javascript').
+  $(document).ready(function(){
+  $('input.typeahead').typeahead({
+  //name: 'typehead',
+  remote: 'http://localhost:3000/search?key=%QUERY',
+  limit: 10
+  });
+  });
+
+ script(type='text/javascript').
+  $(document).ready(function(){
+    $('.delete').on('click', function(e) {
+      $target = $(e.target);
+      const id = ($target.attr('data-id'));
+      $.ajax({
+        type:'DELETE',
+        url: 'http://localhost:3000/deleteConso'+id,
+        success: function(response){
+          alert('Aliment supprimé');
+          window.location.href='/addConso';
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      })
+    })
+  })
+
+block body 
+
+ h3.text-center Consommation du jour
+ hr
+ div.table-responsive-md
+   table.table.teble-striped
+    thead
+     tr 
+      th Type
+      th Aliment
+      th Famille
+      th Calories
+      th Supprimer
+
+    tbody
+     each request, i in requests
+      tr
+       td= request.type 
+       td= request.aliment
+       td= request.famille
+       td= request.calorie 
+       td
+        a.btn.btn-danger.delete(href='#', role='button', data-id=request.id) X
+    each total, i in totals  
+     td
+     td 
+     td 
+     td= 'TOTAL: ' + total.calorie
+     br
+     h6.text-center(style='font-style:oblique')=  "Aujourd'hui, tu as accumulé " + total.calorie + ' calories !'
+     br
+     if total.calorie < 1000
+      p.text-center(style='background-color: rgb(251, 240, 0) ')= "Tu n'a pas assez mangé pour être en forme."
+     if total.calorie > 1000 && total.calorie < 1800
+      p.text-center(style='background-color: rgb(110, 242, 136) ')= "Le quota est dans la norme pour le moment."
+     if total.calorie < 2000 && total.calorie > 1800
+      p.text-center(style='background-color: rgb(251, 240, 0) ')= "Si tu n'est pas en activité, fais attention à la consommation, tu vas bientôt atteindre le quota maximum de 2000cal/j."
+     if total.calorie > 2000 && total.calorie < 2200
+      P.text-center(style='background-color: rgb(251, 240, 0) ')= "Si tu n'est pas activité, fais attention à la consommation, tu vas bientôt atteindre le quota maximum de 2200cal/j."
+     if total.calorie > 2500
+      p.p.text-center(style='background-color: rgb(255, 39, 20) ')= "Attention, tu as dépassé le quota maximum de 2500cal/j !"
+     br
+     br
+    
+ br
+ if errors  
+  ul
+   for error in errors
+    .alert.alert-danger
+      li!= error.msg
+ h4.text-center Ajouter un aliment
+ br
+ .jumbotron.my-4
+  .container
+   .row.justify-content-center
+    .col-md-6
+     
+      form(method='POST', action='/addConso')
+       .row
+        .form-row
+         .col.form-group.col-md-8
+          label Nom de l'aliment:  
+          input.typeahead.tt-query(type='text', name='typeahead', autocomplete='off', spellcheck='false', placeholder="Nom de l'aliment", required='required')
+        .form-row
+         .col.form-group.col-md-6
+          label Nombre:
+          input.form-control(name='nombre', type='number', style='width: 200px;', required='required')
+         .col.form-group.col-md-6
+          label Type de repas:
+          select.form-control(name='type', type='text', style='width: 200px;', required='required')
+           option(value='Déjeuner') Déjeuner
+           option(value='Gouter') Gouter
+           option(value='Grignoter') Grignoter
+           option(value='Petit déjeuner') Petit Déjeuner
+           option(value='Diner') Diner
+       .row
+        .form-row
+         .col.form-group
+          input.btn.btn-success(type='submit', value='Ajouter')
+ br
+ br
+ br
+
+  

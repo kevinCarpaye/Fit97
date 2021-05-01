@@ -1,0 +1,101 @@
+extends layout2
+
+block head
+ script(type='text/javascript').
+  $(document).ready(function(){
+  $('input.typeahead').typeahead({
+  //name: 'typehead',
+  remote: 'http://localhost:3000/search2?key=%QUERY',
+  limit: 10
+  });
+  });
+
+ script(type='text/javascript').
+  $(document).ready(function(){
+    $('.delete').on('click', function(e) {
+      $target = $(e.target);
+      const id = ($target.attr('data-id'));
+      $.ajax({
+        type:'DELETE',
+        url: 'http://localhost:3000/deleteActivity'+id,
+        contentType: "application/json",
+        success: function(response){
+          alert('Activité supprimée');
+          window.location.href='/addActivity';
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      })
+    })
+  })
+
+block body 
+ h4.text-center Dépenses énergétiques du jour
+ hr
+ div.table-responsive-md
+  table.table.teble-striped
+    thead
+     tr
+      th Nom
+      th Equivalent métabolique (MET)
+      th Durée (min)
+      th Calories Brulées
+      th Supprimer
+    tbody
+     each request, i in requests
+      tr
+       td= request.name
+       td= request.MET
+       td= request.time
+       td= request.calorie
+       td
+        a.btn.btn-danger.delete(href='#', role='button', data-id=request.id) X
+    each total, i in totals  
+     td
+     td 
+     td
+     td= 'TOTAL: ' + total.calorie
+     br
+     h6.text-center(style='font-style:oblique')=  "Aujourd'hui, tu as brulé " + total.calorie + ' calories !'
+     br
+     if total.calorie < 1
+      p.text-center(style='background-color: rgb(251, 240, 0) ')= "Pense à faire un peut de sport même si ton apport calorique est stable pour améliorer tes fonctions cardio-respiratoires."
+     if total.calorie > 1 && total.calorie < 200
+      p.text-center(style='background-color: rgb(251, 240, 0) ')= "Encore un effort, tu y es presque."
+     if total.calorie > 200 && total.calorie < 500
+      p.text-center(style='background-color: rgb(110, 242, 136) ')= "C'est bien, tu as fait un effort physique consequent, tu n'es pas sportif mais c'est deja suffisant. Penses a renvouveller l'effort au moins 3 fois par semaine."
+     if total.calorie > 500
+      p.text-center(style='background-color: rgb(110, 242, 136) ')= "Excellent, continues dans cette lancé, ta santé t'en remerciera."
+     br
+     br
+ br
+ if errors  
+     ul
+      for error in errors
+       .alert.alert-danger
+         li!= error.msg
+ h4.text-center Ajouter une activité
+ br
+ .jumbotron
+  .container
+   .row.justify-content-center
+    .col-md-6
+     
+      form(method='POST', action='/addActivity')
+       .row
+        .form-row
+         .col.form-group.col-md-10
+          label Sport:  
+          input.typeahead.tt-query(type='text',name='typeahead', autocomplete='off', spellcheck='false', placeholder="Nom du sport", required='required')
+        .form-row
+         .col.form-group
+          label Durée (en min):
+          input.form-control(name='time', type='number', style='width: 80px;', required='required')
+       .row
+        .form-row
+         .col.form-group
+          br
+          input.btn.btn-success(type='submit', value='Ajouter')
+         
+         

@@ -1,0 +1,107 @@
+extends layout
+
+block head
+  style.
+    body {
+    padding: 20px 0;
+    font-family: Lato, sans-serif;
+    }
+  script.
+
+block body
+  .container
+    br
+    p.text-center Creer votre compte pour bénéficier des services de Fit97.
+    hr
+    br
+    if errors  
+     ul
+      for error in errors
+       .alert.alert-danger
+         li!= error.msg
+    .row.justify-content-center
+      .col-md-6
+        .card
+          header.card-header
+            h4.card-title.mt-2 Inscription
+          article.card-body
+            form(method='POST', action='/register')
+              .form-group
+                label.form-check.form-check-inline
+                  input.form-check-input(type='radio', name='sex', value='Homme')
+                  span.form-check-label  Homme 
+                label.form-check.form-check-inline
+                  input.form-check-input(type='radio', name='sex', value='Femme')
+                  span.form-check-label  Femme
+              // form-group end.//
+              .form-row
+                .col.form-group
+                  label Prénom *
+                  input.form-control(type='text', name='fname', required)
+                // form-group end.//
+                .col.form-group
+                  label Nom *
+                  input.form-control(type='text', name='name', required)
+                // form-group end.//
+              // form-row end.//
+              .form-row
+                .col.form-group
+                  label Date de Naissance *
+                  input.form-control(type='date', name='birthday', required)
+                // form-group end.//
+                .col.form-group
+                  label Numéro de mobile
+                  input.form-control(type='tel', name='mobile')
+                // form-group end.//
+              // form-row end.//
+              .form-row
+                .col.form-group
+                  label Poids (en kg) * 
+                  input.form-control(type='number', name='weight', required)
+                // form-group end.//
+                .col.form-group
+                  label Taille (en cm) *
+                  input.form-control(type='number', name='height', required)
+                // form-group end.//
+              // form-row end.//
+              .form-group
+                label Email *
+                input.form-control(type='email', name='email', required)
+                small.form-text.text-muted
+              // form-group end.//
+              .form-row
+                .col.form-group
+                  label Mot de passe * 
+                  input.form-control(type='password', name='password', required)
+                // form-group end.//
+                .col.form-group
+                  label Confirmation du mot de passe *
+                  input.form-control(type='password', name='confirmpassword', required)
+                // form-group end.//
+              // form-row end.//
+              .form-row
+                .form-group.col-md-6
+                  label Ville *
+                  input.form-control(type='text', name='city', required)
+                // form-group end.//
+                .form-group.col-md-6
+                  label Code Postal *
+                  input.form-control(type='number', name='postcode', required='required')
+                .form-group.col-md-6
+                  label Pays *
+                  input.form-control(type='text', name='country', required)
+                .form-group.col-md-6
+                  span D'accord avec les CGU
+                  input.form-control(type='checkbox', name='cdu' required)
+                // form-group end.//
+              // form-row.//
+              .form-group
+                button.btn.btn-success.btn-block(type='submit')  Valider  
+              // form-group//
+          // card-body end .//
+          .border-top.card-body.text-center
+            | Vous possedez déjà un compte ? 
+            a(href='/login') Se connecter
+        // card.//
+      // col.//
+    // row.//

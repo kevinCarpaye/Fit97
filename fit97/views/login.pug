@@ -1,0 +1,45 @@
+extends layout
+
+block head
+
+block body
+
+ .container
+  br
+  p.text-center Entrez vos identifiants pour commencer.
+  hr
+  br
+  br
+  .row.justify-content-center
+    .col-md-6
+      .card
+        article.card-body
+          h4.card-title.text-center.mb-4.mt-1 Connexion
+          hr
+          p.text-success.text-center
+          form(method='POST', action='/login')
+            .form-group
+              .input-group
+                .input-group-prepend
+                  span.input-group-text
+                    i.fa.fa-user
+                input.form-control(name='email', placeholder='Email', type='email', required)
+              // input-group.//
+            // form-group//
+            br
+            .form-group
+              .input-group
+                .input-group-prepend
+                  span.input-group-text
+                    i.fa.fa-lock
+                input.form-control(name='password', placeholder='******', type='password', required)
+              // input-group.//
+            // form-group//
+            br
+            .form-group
+              button.btn.btn-success.btn-block(type='submit')  Connexion 
+            // form-group//
+            br
+            p.text-center
+              | Vous n'avez pas encore de compte ? 
+              a.btn(href='/register') S'inscrire

@@ -1,0 +1,16 @@
+extends layout2
+
+block body
+
+  h1 Ajouter un article 
+  form(method='POST', action='/add')
+    #form-group
+      label Nom:
+      input.form-control(name='name', type='text')
+    #form-group
+      label Auteur:
+      input.form-control(name='author', type='text')
+    #form-group
+      label Bio:
+      input.form-control(name='bio', type='text')
+    input.btn.btn-primary(type='submit', value='Ajouter')

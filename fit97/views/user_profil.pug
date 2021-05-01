@@ -1,0 +1,91 @@
+extends layout2
+
+block head
+
+block body 
+
+ .container
+    br
+    p.text-center Modifiez les informations si vous le souhaitez. Les anciennes seront automatiquement remplacés.
+    hr
+    br
+    if errors  
+     ul
+      for error in errors
+       .alert.alert-danger
+         li!= error.msg
+    .row.justify-content-center
+      .col-md-6
+        .card
+          header.card-header
+            h4.card-title.mt-2 Informations personnelles
+          article.card-body
+            form(method='POST', action='/profil/')
+              .form-group
+                label.form-check.form-check-inline
+                  input.form-check-input(type='radio', name='sex', value='Homme')
+                  span.form-check-label  Homme 
+                label.form-check.form-check-inline
+                  input.form-check-input(type='radio', name='sex', value='Femme')
+                  span.form-check-label  Femme
+              // form-group end.//
+              .form-row
+                .col.form-group
+                  label Prénom *
+                  input.form-control(type='text', name='fname', value= results.fname, required)
+                // form-group end.//
+                .col.form-group
+                  label Nom *
+                  input.form-control(type='text', name='name', value= results.name, required)
+                // form-group end.//
+              // form-row end.//
+              .form-row
+                .col.form-group
+                  label Date de Naissance *
+                  input.form-control(type='date', name='birthday', value= results.birthday, required)
+                // form-group end.//
+                .col.form-group
+                  label Numéro de mobile
+                  input.form-control(type='tel', name='mobile', value= results.mobile)
+                // form-group end.//
+              // form-row end.//
+              .form-row
+                .col.form-group
+                  label Poids (en kg) * 
+                  input.form-control(type='number', name='weight', value= results.weight, required)
+                // form-group end.//
+                .col.form-group
+                  label Taille (en cm) *
+                  input.form-control(type='number', name='height', value= results.height, required)
+                // form-group end.//
+              // form-row end.//
+              .form-group
+                label Email *
+                input.form-control(type='email', name='email', value= results.email, required)
+                small.form-text.text-muted
+              // form-group end.//
+              .form-row
+                .form-group.col-md-6
+                  label Ville *
+                  input.form-control(type='text', name='city', value= results.city, required)
+                // form-group end.//
+                .form-group.col-md-6
+                  label Code Postal *
+                  input.form-control(type='number', name='postcode', value= results.postcode, required='required')
+                .form-group.col-md-6
+                  label Pays *
+                  input.form-control(type='text', name='country', value= results.country, required)
+                .form-group.col-md-6
+                // form-group end.//
+              // form-row.//
+              .form-group
+                button.btn.btn-success.btn-block(type='submit')  Valider  
+              // form-group//
+          // card-body end .//
+          .border-top.card-body.text-center
+            form(method='GET', action='/profil_pass')
+              label Mot de passe  
+              button.btn.btn-secondary.btn-block(type='submit', style='width: 100px, margin: center' ) MODIFIER
+        // card.//
+      // col.//
+    // row.//

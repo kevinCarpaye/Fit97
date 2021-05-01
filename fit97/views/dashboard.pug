@@ -1,0 +1,58 @@
+extends layout2
+
+block head
+
+block body
+ .container
+  h3.text-center Dashboard
+  hr
+  // Jumbotron Header
+  header.jumbotron.my-4
+    h4= 'Bonjour ' + founds
+    p.lead
+  .row.text-center
+    .col-md-12.user-details
+      .row.coralbg.white
+        .col-md-6.no-pad            
+      .row.overview
+        .col-md-4.user-pad.text-center
+          h3 Consommations                  
+          h4= requests         
+        .col-md-4.user-pad.text-center
+          h3 Activités              
+          h4= totals          
+        .col-md-4.user-pad.text-center
+          h3 Balance   
+          h4= requests - totals   
+      hr
+      br    
+  // Page Features
+  .row.text-center
+    .col-lg-4.col-md-6.mb-3
+      .card
+        img.card-img-top(src='/img/image1.jpg', alt='')
+        .card-body
+          h4.card-title Ma consommation
+          p.card-text
+            | Clique ici pour ajouter un repas et connaitre ton apport calorique journalier !
+        .card-footer
+          a.btn.btn-success(href='/addConso') Ajout consommation
+    .col-lg-4.col-md-6.mb-3
+      .card
+        img.card-img-top(src='/img/image2.jpg', alt='')
+        .card-body
+          h4.card-title Pratique sportive
+          p.card-text
+            | Si tu as effectué un effort physique, penses à le répertorier ici !
+        .card-footer
+          a.btn.btn-success(href='/addActivity') Ajout dépense physique
+    .col-lg-4.col-md-6.mb-3
+      .card
+        img.card-img-top(src='/img/image3.png', alt='')
+        .card-body
+          h4.card-title Profil
+          p.card-text
+            | Vous pouvez modifier vos informations personnelles ici
+        .card-footer
+          a.btn.btn-success(href='/profil') Modifier profil
+  // /.row

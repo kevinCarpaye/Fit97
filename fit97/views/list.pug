@@ -1,0 +1,29 @@
+extends layout2
+
+block head
+
+block body
+ 
+  h2.text-center Liste des articles
+   div.table-responsive-md
+    table.table.teble-striped
+     thead
+      tr
+        th Famille
+        th Aliment
+        th Calories
+        th Protéines
+        th Glucides
+        th Lipides
+        th Quantité
+     tbody
+      each aliment, i in aliments
+       tr
+        td= aliment.famille
+        td= aliment.aliment
+        td= aliment.calorie
+        td= aliment.proteine
+        td= aliment.glucide
+        td= aliment.lipide
+        td= aliment.quantite + aliment.unite
+     

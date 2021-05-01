@@ -1,0 +1,39 @@
+extends layout2
+
+block head 
+
+block body 
+
+ .container
+  br
+  p.text-center Entrez votre nouveau mot de passe. L'ancien  sera automatiquement remplacé !
+  hr
+  br
+  br
+  if errors  
+     ul
+      for error in errors
+       .alert.alert-danger
+         li!= error.msg
+  .row.justify-content-center
+    .col-md-6
+      .card
+        article.card-body
+          h4.card-title.text-center.mb-4.mt-1 Modification mot de passe
+          hr
+          p.text-success.text-center
+          form(method='POST', action='/profil_pass')
+            .form-group
+              label Nouveau mot de passe *
+              input.form-control(name='password', placeholder='', type='password', required)
+              // input-group.//
+            // form-group//
+            br
+            .form-group
+              input.form-control(name='confirmpassword', placeholder='confirmation du mot de passe', type='password', required)
+              // input-group.//
+            // form-group//
+            br
+            .form-group
+              button.btn.btn-success.btn-block(type='submit')  MODIFIER
+            // form-group//

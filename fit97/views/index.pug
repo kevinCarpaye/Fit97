@@ -1,0 +1,52 @@
+extends layout
+
+block body
+ br
+ br
+ h2 Bienvenue sur Fit97
+ br
+ #demo.carousel.slide(data-ride='carousel')
+  // Indicators
+  ul.carousel-indicators
+    li.active(data-target='#demo', data-slide-to='0')
+    li(data-target='#demo', data-slide-to='1')
+    li(data-target='#demo', data-slide-to='2')
+  // The slideshow
+  .carousel-inner
+    .carousel-item.active
+      img(src='/img/image4.jpg', alt='Los Angeles', width='1100', height='500')
+    .carousel-item
+      img(src='/img/image5.jpg', alt='Chicago', width='1100', height='500')
+    .carousel-item
+      img(src='/img/image6.jpg', alt='New York', width='1100', height='500')
+  // Left and right controls
+  a.carousel-control-prev(href='#demo', data-slide='prev')
+    span.carousel-control-prev-icon
+  a.carousel-control-next(href='#demo', data-slide='next')
+    span.carousel-control-next-icon
+
+ .container.marketing
+  hr.featurette-divider
+  .row.featurette
+    .col-md-7
+      h2.featurette-heading
+        | L'alimentation. 
+        span.text-muted On est ce que l'on mange.
+      br
+      p.lead
+        | Varier son alimentation est le seul moyen d'apporter tous les éléments nécessaires à l'entretien et au bon fonctionnement de notre corps. Si tu ne manges que de la pizza et des bonbons, tu vas manquer de fibres, de minéraux et de vitamines ! Pour équilibrer ton alimentation, il suffit de bien savoir composer tes repas. Manger, c'est avant tout faire le plein d'énergie ...  mais pas seulement !
+    .col-md-5
+      img.featurette-image.img-fluid.mx-auto(src='/img/image7.jpg', alt='Generic placeholder image')
+  hr.featurette-divider
+  .row.featurette
+    .col-md-7.order-md-2
+      h2.featurette-heading
+        | Le sport. 
+        span.text-muted Se dépenser pour rester en forme.
+      br
+      p.lead
+        | Faire du sport est bon pour maigrir mais pas seulement. Les avantages de la pratique du sport sur la santé se situent au niveau physique mais aussi mental. Angoisse et dépression peuvent être combattues en faisant du sport. Le bien-être consécutif à la pratique sportive permet d'affirmer que le sport ajoute de la vie aux années. Il suffit pour cela de faire du sport tous les jours à raison de 30 minutes de marche rapide; c'est le seuil minimal d'activité physique préconisé par le Programme national nutrition-santé du Ministère de la Santé et de la Protection sociale.
+    .col-md-5.order-md-1
+      img.featurette-image.img-fluid.mx-auto(src='/img/image8.jpg', alt='Generic placeholder image')
+
+
